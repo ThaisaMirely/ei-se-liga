@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ei, se liga!!</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_title">Title</string>
+    <string name="label_date">Date</string>
+    <string name="label_time">Time</string>
+    <string name="label_audio">Audio</string>
+</resources>
