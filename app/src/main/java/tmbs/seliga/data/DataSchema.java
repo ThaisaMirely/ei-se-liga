@@ -11,8 +11,8 @@ public class DataSchema {
                     + ReminderEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + ReminderEntry.COLUMN_TITLE + " TEXT NOT NULL, "
                     + ReminderEntry.COLUMN_DATE + " TEXT NOT NULL, "
-                    + ReminderEntry.COLUMN_TIME + "TEXT NOT NULL, "
-                    + ReminderEntry.COLUMN_AUDIO + "TEXT)";
+                    + ReminderEntry.COLUMN_TIME + " TEXT NOT NULL, "
+                    + ReminderEntry.COLUMN_AUDIO + " TEXT)";
     public static final String SQL_EXCLUDE_ENTRIES =
             "DROP TABLE IF EXISTS" + ReminderEntry.TABLE_NAME;
 

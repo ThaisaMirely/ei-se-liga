@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,8 @@ public class ReminderDataSource {
     }
 
     private void open() throws SQLException {
-        if (!database.isOpen()) {
+        //If database is null, then get its instance at once
+        if (database == null || !database.isOpen()) {
             database = reminderSQLiteOpenHelper.getWritableDatabase();
         }
     }
@@ -44,7 +46,6 @@ public class ReminderDataSource {
 
     public Reminder insert(Reminder reminder) {
         open();
-
         long insertId = database.insert(ReminderEntry.TABLE_NAME,
                 null,
                 getValues(reminder));
@@ -76,6 +77,29 @@ public class ReminderDataSource {
 
     public List<Reminder> select() {
         List<Reminder> reminderList = new ArrayList<>();
+
+        return reminderList;
+    }
+
+    /**
+     * Lists all Reminders sotred into the database.
+     * @return A list of Reminder objects.
+     */
+    public List<Reminder> listAllReminders() {
+        open();
+        //Stores all Reminders into a cursor
+        Cursor cursor = database.query(ReminderEntry.TABLE_NAME, allColumns, null, null, null, null, null);
+
+        List<Reminder> reminderList = new ArrayList<>();
+
+        //Iterates the cursor, retrieveing every Reminder and adding them to the List.
+        while(cursor.moveToNext()){
+            Reminder reminder = cursorToReminder(cursor);
+            reminderList.add(reminder);
+        }
+
+        cursor.close();
+        close();
 
         return reminderList;
     }
